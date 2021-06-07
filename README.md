@@ -7,7 +7,7 @@ I developed a program in PHP version: 7.3.12 to calculate the date for low and m
 
 It is hosted in: https://calcradio.000webhostapp.com 
 
-If somebody wants to download the program to improve or modify or host it in your website, its code and DB is available here:
+If somebody wants to download the program to improve or modify or host it in your website, its code and DB is available here.
 
 I only ask to maintain the sentence: Originally developed by: Ary de Araujo Rodrigues Junior.
 
