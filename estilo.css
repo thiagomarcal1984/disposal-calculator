@@ -1,0 +1,24 @@
+h2
+{
+    text-align:center;
+    font-weight: bold;
+}
+
+div
+{
+    text-align:center;
+}
+
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a
+{
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
