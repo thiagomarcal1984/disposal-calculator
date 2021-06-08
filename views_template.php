@@ -236,14 +236,14 @@
                             <th>Atividade medida<br>(Bq/m<sup>3</sup>)</th>
                             <?php endif; ?>
                             <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Atividade medida<br>(Bq/kg)</th>
+                            <th>Atividade medida<br>(kBq/kg)</th>
                             <?php endif; ?>
                             <th>Data da<br>medida</th>
                             <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
                             <th>Atividade<br>para descarte<br>(Bq/m<sup>3</sup>)</th>
                             <?php endif; ?>
                             <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Atividade<br>para descarte<br>(Bq/kg)</th>
+                            <th>Atividade<br>para descarte<br>(kBq/kg)</th>
                             <?php endif; ?>
                             <th>Meia-vida<br>utilizada*<br>(dias)</th>
                             <th>Número de dias <br>para o descarte</th>
@@ -255,14 +255,14 @@
                             <th>Measured activity<br>(Bq/m<sup>3</sup>)</th>
                             <?php endif; ?>
                             <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Measured activity<br>(Bq/kg)</th>
+                            <th>Measured activity<br>(kBq/kg)</th>
                             <?php endif; ?>
                             <th>Measurement<br>date</th>
                             <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
                             <th>Disposal<br>activity<br>(Bq/m<sup>3</sup>)</th>
                             <?php endif; ?>
                             <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Disposal<br>activity<br>(Bq/kg)</th>
+                            <th>Disposal<br>activity<br>(kBq/kg)</th>
                             <?php endif; ?>
                             <th>Half-life<br>utilized*<br>(days)</th>
                             <th>Numbers of days<br>for disposal</th>
