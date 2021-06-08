@@ -181,10 +181,10 @@
                          kCi/kg
 
                          <input type="radio" required name="unidade" value="3"/>
-                         mCi/kg
+                         Ci/kg
 
                          <input type="radio" required name="unidade" value="4"/>
-                         uCi/kg
+                         mCi/kg
                     <?php else:?>
                     <?php endif;?>
                 <?php if(isset($erros_validacao['unidade'])):?>
