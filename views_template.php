@@ -1,301 +1,353 @@
-<?php require_once 'controller_menu.php';?>
-<html align="center"><font size="4">
+<html>
 
     <head>
         <meta charset="utf-8" />
-        <title>Calculadora de data para descarte de Material Radioativo</title>
-        <link rel="stylesheet" href="index.css" type="text/css" />
-        <style>
-        .erro{
-			color: red;
-			font-size: 20px}
-        </style>
-    </head>
-        <body>
-            <?php
-                require_once 'controller_cabecalho.php';
-                cabecalho();
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            <?= 
+                ($lingua == 1) ? 
+                "Calculadora de Data para Descarte de Material Radioativo" :
+                "Disposal Date Calculator for Radioactive Material"
             ?>
-        <hr/>
-        <?php
-            if($opcao==1)
-            {
-                menuInicio();
-                menuSolido();
-                menuParametros();
-                menuVoltar();
+        </title>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
+        <style>
+            .erro {
+                background-color: red;
+                color: white;
+                font-size: 20px
             }
-            elseif($opcao==2)
-            {
-                menuInicio();
-                menuLiqGas();
-                menuParametros();
-                menuVoltar();
-            }
-                    
-         ?>
+        </style>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+
+    <!-- 
+        Aplicação das classes para que o corpo ocupe toda a altura da tela.
+        Isso é necessário para manter o rodapé no fim da página, mesmo que 
+        haja pouco conteúdo na tag main.
+    -->
+    <body class="min-vh-100 d-flex flex-column">
+        <?php require 'partials/header.php'; ?>
+
+        <main class="container container-md-fluid pt-3">
+            <div class="row align-items-start">
+                <div class="col-12 col-md-6 order-md-first order-last">
+                    <form class="border border-secondary rounded p-3 my-2" method="POST">
+                        <h3 class="text-primary">
+                            <?php if ($lingua == 1 && $opcao == 1) : ?> 
+                                Rejeito líquido e gasoso
+                            <?php elseif ($lingua == 2 && $opcao == 1) : ?> 
+                                Liquid and gaseous waste
+                            <?php elseif ($lingua == 1 && $opcao == 2) : ?> 
+                                Rejeito sólido
+                            <?php elseif ($lingua == 2 && $opcao == 2) : ?> 
+                                Solid waste
+                            <?php endif ?> 
+                        </h3>
+                        <div class="row py-2">
+                            <!--Identificação do radionuclídeo-->
+                            <div class="col-12 col-md-4">
+                                <label for="nome" class="form-label">
+                                    <?= ($lingua == 1) ? "Radionuclídeo:" : "Radionuclide:" ?>
+                                </label>
+                            </div>
             
-            <hr/>
-                <?php
-                    require_once 'controller_cabecalho.php';
-                    subCabecalho();
-                ?>
-            </hr>
-            <table align="center">
-                <th align=center></th>
+                            <div class="col-12 col-md-8">
+                                <select class="form-select" required name="nome" id="nome">
+                                    <option value="">
+                                        <?= ($lingua == 1) ? "Escolha" : "Select" ?>
+                                    </option>
                 
-                <th align=center>
+                                    <?php
+                                        $query = "";
+                                        $query .= "SELECT * FROM radio ";
+                                        if ($opcao == 2) { // sólidos
+                                            $query .= "where sol!=0 ";
+                                        }
+                                        $query .= "ORDER BY radionuclideo ASC";
+                                        $resultado = mysqli_query($conexao, $query);
+                                    ?>
+                                    <?php while ($linha = $resultado->fetch_array()) : ?>
+                                        <?php /* 
+                                            <option value="<?= $linha['id'] ?>"> 
+                                        */ ?>
+                                        <option>
+                                            <?= ($lingua == 1) ? $linha['radionuclideo'] : $linha['radionuclide'] ?>
+                                        </option>
+                                    <?php endwhile ?>
+                
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row py-2">
+                            <!--Estado do radionuclídeo-->
+                            <?php if ($opcao == 1) : ?>
+                                <!--Líquido e gasosos-->
+                                <div class="col-12 col-md-4">
+                                    <span class="form-label">
+                                        <?= ($lingua == 1) ? "Estado:" : "State:" ?>
+                                    </span>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <div class="btn-group w-100" role="group">
+                                        <input type="radio" class="btn-check" required name="estado" id="estado_liquido" value="1" />
+                                        <label class="btn btn-outline-primary" for="estado_liquido">
+                                            <?= ($lingua == 1) ? "Liquido" : "Liquid" ?>
+                                        </label>
 
-            <form method='POST'>
+                                        <input type="radio" class="btn-check" required name="estado" id="estado_solido" value="2" />
+                                        <label class="btn btn-outline-primary" for="estado_solido">
+                                            <?= ($lingua == 1) ? "Gasoso" : "Gaseous" ?>
+                                        </label>
+                                    </div>
+                
+                                    <?php if (isset($erros_validacao['estado'])) : ?>
+                                        <span class="erro">
+                                            <?php echo $erros_validacao['estado']; ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            <?php elseif ($opcao == 2) : ?>
+                                <!--Sólido-->
+                                <div class="col-12 col-md-4">
+                                    <span class="form-label">
+                                        <?= ($lingua == 1) ? "Estado: " : "State: " ?>
+                                    </span>
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <span class="form-label">
+                                        <?= ($lingua == 1) ? "Sólido" : "Solid" ?>
+                                        (<=1000 kg)
+                                    </span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
             
-                <fieldset id="contorno1" style="width:700px;height:300px; margin:auto"><font size="4">
-                    <!--Identificação do radionuclídeo-->
-                    <?php if($lingua==1):?>
-                    <label>Radionuclídeo:</label>
-                    <select type="text" required name="nome">
-                    <option value="">Escolha</option>
-                    <?php else:?>
-                    <label>Radionuclide:</label>
-                    <select type="text" required name="nome">
-                    <option value="">Select</option>
-                    <?php endif;?>
-                   <!--<input type="text" name="nome" placeholder="Nome do radionucídeo"/>-->
-                   <?php
-                        if($opcao==1)//Para líquidos e gasosos
-                        {
-                            $dados = mysqli_query($conexao, "SELECT * FROM radio ORDER BY radionuclideo ASC");
-                        }
-                        elseif($opcao==2)// Para sólidos
-                        {
-                            $dados = mysqli_query($conexao, "SELECT * FROM radio where sol!=0 ORDER BY radionuclideo ASC");
-                        }
-                        while($dados2 = $dados->fetch_array())// Passando os dados do radionuclídeo selecionado para a forma de vetor e
-                            {                                 // os transferindo para outra variável
-                                if($lingua==1)
-                                {
-                                    echo '<option>'.$dados2['radionuclideo'].'</option>';
-                                }
-                                else
-                                {
-                                    echo '<option>'.$dados2['radionuclide'].'</option>';
-                                }
-                                
-                            }
-                                                      
-                    ?>
-                    </select>
+                        <div class="row py-2">
+                            <!--Atividade-->
+                            <div class="col-12 col-md-4">
+                                <label for="atividade" class="form-label">
+                                    <?= ($lingua == 1)  ? "Atividade:" :" Activity:" ?>
+                                </label>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <input class="form-control" type="text" required id="atividade" name="atividade" placeholder="Ex: 1234 ; 1.234e3" />
+                                <?php if (isset($erros_validacao['atividade'])) : ?>
+                                    <span class="erro">
+                                        <?php echo $erros_validacao['atividade']; ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+            
+                        <div class="row py-2">
+                            <!--Unidade da atividade-->
+                            <div class="col-12 col-md-4">
+                                <span class="form-label">
+                                    <?= ($lingua == 1) ? "Unidade da atividade:" :"Activity unit:" ?>
+                                </span>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="btn-group w-100">
+                                    <?php if ($opcao == 1) : ?>
+                                        <!--Líquido e gasoso-->
                     
-                    </label><br><br>
-                                          
-                   <!--Estado do radionuclídeo-->
-                   <!--Líquido e gadosos-->
-                   <?php if($opcao==1):?>
-                <?php if($lingua==1):?>
-                    <label>
-                    Estado:
-                        <input type="radio" required name="estado" value="1"/>
-                         Liquido
-                        
-                        <input type="radio" required name="estado" value="2"/>
-                         Gasoso
-                         <?php if(isset($erros_validacao['estado'])):?>
-                            <span class="erro" >
-                         <?php echo $erros_validacao['estado'];?>
-                            </span>
-                            <?php endif;?>
-                    </label><br><br>
-                <?php else:?>
-                        <label>
-                        State:
-                        <input required type="radio" name="estado" value="1"/>
-                         Liquid
-                        
-                        <input required type="radio" name="estado" value="2"/>
-                         Gaseous
-                         <?php if(isset($erros_validacao['estado'])):?>
-                            <span class="erro" >
-                         <?php echo $erros_validacao['estado'];?>
-                            </span>
-                <?php endif;?>
-                    </label><br><br>
-                    <?php endif;?>
-                    <!--Sólido-->
-                    <?php elseif($opcao==2):?>
-                <?php if($lingua==1):?>
-                    <label>
-                    Estado: Sólido (< = 1000 kg)
-                      
-                    </label><br><br>
-                <?php else:?>
-                    <label>
-                    State: Solid (< = 1000 kg)
-                        
-                    </label><br><br>
-                    <?php endif; ?>
-                    <?php else:?>
-                    <?php endif;?>
-
-
-                 <!--Atividade-->
-                 <label>
-                 <?php if($lingua==1):?>
-                    Atividade:
-                <?php else:?>
-                    Activity:
-                <?php endif; ?>
-                    <input type="text" required name="atividade" placeholder="Ex: 1234 ; 1.234e3"/>
-                </label>
-                <?php if(isset($erros_validacao['atividade'])):?>
-                            <span class="erro" >
-                <?php echo $erros_validacao['atividade'];?>
-                            </span>
-                <?php endif;?><br><br>
-                    <!--Unidade da atividade-->
-                    <!--Líquido e gadosos-->
-                    <?php if($lingua==1):?>
-                        <label>Unidade da atividade:
-                    <?php else:?>
-                        <label>Activity unit:
-                    <?php endif;?>
-
-                    <?php if($opcao==1):?>
-                    
-                        <input type="radio" required name="unidade" value="1"/>
-                         Bq/m<sup>3</sup>
-
-                        <input type="radio" required name="unidade" value="2"/>
-                         Ci/m<sup>3</sup>
-
-                         <input type="radio" required name="unidade" value="3"/>
-                         mCi/m<sup>3</sup>
-
-                         <input type="radio" required name="unidade" value="4"/>
-                         uCi/m<sup>3</sup>
-                    <!--Sólido-->
-                    <?php elseif($opcao==2):?>
-                    <!--<label>Unidade da atividade:-->
-                        <input type="radio" required name="unidade" value="1"/>
-                         kBq/kg
-
-                        <input type="radio" required name="unidade" value="2"/>
-                         kCi/kg
-
-                         <input type="radio" required name="unidade" value="3"/>
-                         Ci/kg
-
-                         <input type="radio" required name="unidade" value="4"/>
-                         mCi/kg
-                    <?php else:?>
-                    <?php endif;?>
-                <?php if(isset($erros_validacao['unidade'])):?>
-                            <span class="erro" >
-                <?php echo $erros_validacao['unidade'];?>
-                            </span>
-                <?php endif;?>
-                    </label><br><br>
-
-                <!--Data da medida-->
-                <label>
-                <?php if($lingua==1):?>
-                    Data da medida:
-                <?php else:?>
-                    Measurement date:
-                <?php endif; ?>
-                    <input type="date" required name="data"/>
-                  <?php if(isset($erros_validacao['data'])):?>
-                            <span class="erro" >
-                  <?php echo $erros_validacao['data'];?>
-                            </span>
-                  <?php endif;?>
-                 </label>
-                 &nbsp; &nbsp;
-                 <?php if($lingua==1):?>
-                   <input type="submit" value="Calcular"/><br><br>
-                 <?php else:?>
-                    <input type="submit" value="Calculate"/><br><br>
-                <?php endif;?>
-
-                </fieldset>
-                </form>
-                <br>
-                </th>
-                
-                <th align=center></th>
-            </table>
-
-
-                <fieldset id="contorno1" style="width:1200px;height:100px; margin: auto">
-                
-                    <!--Data do descarte e a atividade nessa data-->
-                    <table align=center border="1" width="1000px">
-                        <tr align=center>
-                        <?php if($lingua==1):?>
-                            <th>Radionuclídeo</th>
-                            <th>Estado</th>
-                            <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
-                            <th>Atividade medida<br>(Bq/m<sup>3</sup>)</th>
+                                        <input type="radio" class="btn-check" required id="op1" name="unidade" value="1" />
+                                        <label class="btn btn-outline-primary" for="op1">
+                                            Bq/m<sup>3</sup>
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op2" name="unidade" value="2" />
+                                        <label class="btn btn-outline-primary" for="op2">
+                                            Ci/m<sup>3</sup>
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op3" name="unidade" value="3" />
+                                        <label class="btn btn-outline-primary" for="op3">
+                                            mCi/m<sup>3</sup>
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op4" name="unidade" value="4" />
+                                        <label class="btn btn-outline-primary" for="op4">
+                                            uCi/m<sup>3</sup>
+                                        </label>
+                                    <?php elseif ($opcao == 2) : ?>
+                                        <!--Sólido-->
+                                        <input type="radio" class="btn-check" required id="op1" name="unidade" value="1" />
+                                        <label class="btn btn-outline-primary" for="op1">
+                                        kBq/kg
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op2" name="unidade" value="2" />
+                                        <label class="btn btn-outline-primary" for="op2">
+                                            kCi/kg
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op3" name="unidade" value="3" />
+                                        <label class="btn btn-outline-primary" for="op3">
+                                            Ci/kg
+                                        </label>
+                                        
+                                        <input type="radio" class="btn-check" required id="op4" name="unidade" value="4" />
+                                        <label class="btn btn-outline-primary" for="op4">
+                                            mCi/kg
+                                        </label>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <?php if (isset($erros_validacao['unidade'])) : ?>
+                                <span class="erro">
+                                    <?php echo $erros_validacao['unidade']; ?>
+                                </span>
                             <?php endif; ?>
-                            <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Atividade medida<br>(kBq/kg)</th>
-                            <?php endif; ?>
-                            <th>Data da<br>medida</th>
-                            <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
-                            <th>Atividade<br>para descarte<br>(Bq/m<sup>3</sup>)</th>
-                            <?php endif; ?>
-                            <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Atividade<br>para descarte<br>(kBq/kg)</th>
-                            <?php endif; ?>
-                            <th>Meia-vida<br>utilizada*<br>(dias)</th>
-                            <th>Número de dias <br>para o descarte</th>
-                            <th>Data para<br>descarte</th>
-                        <?php else:?>
-                            <th>Radionuclide</th>
-                            <th>State</th>
-                            <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
-                            <th>Measured activity<br>(Bq/m<sup>3</sup>)</th>
-                            <?php endif; ?>
-                            <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Measured activity<br>(kBq/kg)</th>
-                            <?php endif; ?>
-                            <th>Measurement<br>date</th>
-                            <?php if($opcao==1): ?><!--Unidade para líquidos e gasosos-->
-                            <th>Disposal<br>activity<br>(Bq/m<sup>3</sup>)</th>
-                            <?php endif; ?>
-                            <?php if($opcao==2): ?><!--Unidade para sólidos-->
-                            <th>Disposal<br>activity<br>(kBq/kg)</th>
-                            <?php endif; ?>
-                            <th>Half-life<br>utilized*<br>(days)</th>
-                            <th>Numbers of days<br>for disposal</th>
-                            <th>Disposal<br> date</th>
-                        <?php endif;?>
-                        </tr>
-                    
-                        <tr align=center> 
-                        <?php foreach ($lista_radio as $radio) : ?>
-                            <td><?php echo $radio['nome']; ?></td>
-                            <td><?php echo $estado2; ?></td>                            
-                            <td><?php echo $ainicial2; ?></td>
-                            <td><?php echo $data_exibicao; ?></td>
-                            <td><?php echo $adescarte; ?></td>
-                            <td><?php echo $hl;?></td>
-                            <td><?php echo $t;?></td>
-                            <td><?php echo $data_descarte;?></td>
-                        </tr>
-                        <?php endforeach;?>
-                    </table><br><br>
-                                
-                </fieldset>
-               
-<?php
-    require_once 'controller_footer.php';
-    footer();
-    footerAutor();
-?>
+                        </div>
+            
+                        <div class="row py-2">
+                            <!--Data da medida-->
+                            <div class="col-12 col-md-4">
+                                <label for="data" class="form-label">
+                                    <?= ($lingua == 1) ? "Data da medida:"  : "Measurement date:" ?>
+                                </label>
+                            </div>
+                            
+                            <div class="col-12 col-md-8">
+                                <input class="form-control" type="date" required id="data" name="data" />
+                                <?php if (isset($erros_validacao['data'])) : ?>
+                                    <span class="erro">
+                                        <?php echo $erros_validacao['data']; ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+            
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg mt-3 mt-md-auto">
+                                <?= ($lingua == 1) ? "Calcular"  : "Calculate" ?>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="alert alert-warning small">
+                        (<?= 
+                            $lingua == 1 ? 
+                            "Seguindo a publicação: " :
+                            "According to publication: "
+                        ?>
+                        <a class='letra' target='_blank' href=http://appasp.cnen.gov.br/seguranca/normas/pdf/Nrm801.pdf>CNEN-8.01 Gerência de rejeitos de baixo e médio níveis de radiação</a>)
+                    </div>
+                </div>
+                <?php if (isset($data_exibicao)) : ?>
+                    <div class="col-12 col-md-6 order-first order-md-last">
+                        <!--Data do descarte e a atividade nessa data-->
+                        <div class="border border-secondary rounded p-3 my-2">
+                            <h3 class="text-primary">
+                                <?= ($lingua == 1) ? "Resultado" : "Result" ?>
+                            </h3>
+                            <table class="table table-bordered table-striped">
+                                <th>
+                                    <?= ($lingua == 1) ? "Radionuclídeo" :  "Radionuclide" ?>
+                                </th>
+                                <td>
+                                    <?php echo $radio['nome']; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Estado" :  "State" ?>
+                                </th>
+                                <td>
+                                    <?php echo $estado2; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Atividade medida" :  "Measured activity" ?>
+                                    
+                                    <?php if ($opcao == 1) : ?>
+                                        <!--Unidade para líquidos e gasosos-->
+                                        (Bq/m<sup>3</sup>)
+                                    <?php endif; ?>
+                                    <?php if ($opcao == 2) : ?>
+                                        <!--Unidade para sólidos-->
+                                        (kBq/kg)
+                                    <?php endif; ?>
+                                </th>
+                                <td>
+                                    <?php echo $ainicial2; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Data da medida" :  "Measurement date" ?>
+                                </th>
+                                <td>
+                                    <?php echo $data_exibicao; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Atividade para descarte" :  "Disposal activity" ?>
+                                    
+                                    <?php if ($opcao == 1) : ?>
+                                        <!--Unidade para líquidos e gasosos-->
+                                        (Bq/m<sup>3</sup>)
+                                    <?php elseif ($opcao == 2) : ?>
+                                        <!--Unidade para sólidos-->
+                                        (kBq/kg)
+                                    <?php endif; ?>
+                                </th>
+                                <td>
+                                    <?php echo $adescarte; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Meia-vida utilizada* (dias)" :  "Half-life utilized* (days)" ?>
+                                </th>
+                                <td>
+                                    <?php echo $hl; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Número de dias  para o descarte" :  "Numbers of days for disposal" ?>
+                                </th>
+                                <td>
+                                    <?php echo $t; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <?= ($lingua == 1) ? "Data para descarte" :  "Disposal date" ?>
+                                </th>
+                                <td>
+                                    <?php echo $data_descarte; ?>
+                                </td>
+                            </table>
+                            <div class="text-center small">
+                                <?= 
+                                    $lingua == 1 ? 
+                                    "* As meias-vidas foram obtidas do seguinte site da IAEA (Agência Internacional de Energia Atômica): " : 
+                                    "* The half-lifes were obtained from IAEA (International Atomic Energy Agency):"
+                                ?>
+                                <a target="_blank" href="https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html">
+                                    https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <? endif ?>
+            </div>
 
-
-                
-                    
-                    
-        </body>
-
+        </main>
+        <!-- 
+            A margem superior automática (mt-auto) serve para manter o rodapé 
+            no fim da tela, desde que a tag pai ocupe toda a tela.
+        -->
+        <footer class="bg-primary py-3 mt-auto">
+            <?php require_once 'partials/footer.php'; ?>
+        </footer>
+    </body>
 </html>

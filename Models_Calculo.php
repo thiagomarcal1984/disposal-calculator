@@ -4,8 +4,9 @@ class Models_Calculo
     //Atributos
     private $atividade;
     private $meiaVida;
-    private $atividadeReferencia;
-    
+    // private $atividadeReferencia;
+    private $atividadeDescarte;
+
     //Métodos
     function calcularDias()
     {
