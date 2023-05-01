@@ -1,13 +1,13 @@
 <?php
-    // Se língua for igual a 1, temos português;
-    // Se língua for igual a 2, temos inglês.
+    // Se língua for igual a 1, temos portugu&ecirc;s;
+    // Se língua for igual a 2, temos ingl&ecirc;s.
     if (isset($_GET['lingua'])) {
         $lingua = $_GET['lingua'] == 1 ? 1 : 2;
     } else {
         $lingua = 1;
     }
 ?>
-<h3 class="text-center text-bg-primary py-3 my-0">
+<h3 class="text-center text-bg-primary py-3 px-1 my-0">
     <?= 
         ($lingua == 1) ? 
         "Calculadora de Data para Descarte de Material Radioativo" :
@@ -20,7 +20,7 @@
         <div class="container">
             <a class="navbar-brand nav-link" href="index.php">
                 <i class="bi bi-translate"></i>
-                <?= $lingua == 1 ? "Início/Idioma" : "Home/Language" ?>
+                <?= $lingua == 1 ? "In&iacute;cio/Idioma" : "Home/Language" ?>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#comandos" aria-controls="comandos" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -30,21 +30,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="controller_entrada.php?opcao=1&lingua=<?= $lingua?>">
                             <i class="ms-4 ms-md-0 bi bi-moisture"></i>
-                            <?= $lingua == 1 ? "Rejeito líquido e gasoso" : "Liquid and gaseous wastes" ?>
+                            <?= $lingua == 1 ? "Rejeito l&iacute;quido e gasoso" : "Liquid and gaseous wastes" ?>
                         </a>
                     </li>
                 
                     <li class="nav-item">
                         <a class="nav-link" href="controller_entrada.php?opcao=2&lingua=<?= $lingua?>">
                             <i class="ms-4 ms-md-0 bi bi-bricks"></i>
-                            <?= $lingua == 1 ? "Rejeito sólido" : "Solid waste" ?>
+                            <?= $lingua == 1 ? "Rejeito s&oacute;lido" : "Solid waste" ?>
                         </a>
                     </li>
                 
                     <li class="nav-item">
                         <a class="nav-link" href="controller_entrada.php?opcao=3&lingua=<?= $lingua?>">
                             <i class="ms-4 ms-md-0 bi bi-calculator"></i>
-                            <?= $lingua == 1 ? "Ir para Parâmetros a sua escolha" : "Go to Parameters of your choice" ?>
+                            <?= $lingua == 1 ? "Ir para Par&acirc;metros a sua escolha" : "Go to Parameters of your choice" ?>
                         </a>
                     </li>
                 

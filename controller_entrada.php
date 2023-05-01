@@ -58,7 +58,7 @@ $lingua=$_GET['lingua'];
                 {
                     if($lingua==1)
                     {
-                        $erros_validacao['estado']='O estado do radionuclídeo é obrigatório!';
+                        $erros_validacao['estado']='O estado do radionucl&iacute;deo &eacute; obrigat&oacute;rio!';
                     }
                     else
                     {
@@ -81,7 +81,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['atividade']='A atividade inicial é obrigatória!';
+                    $erros_validacao['atividade']='A atividade inicial &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -99,7 +99,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['unidade']='A unidade é obrigatória!';
+                    $erros_validacao['unidade']='A unidade &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -116,7 +116,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['data']='A data da medida é obrigatória!';
+                    $erros_validacao['data']='A data da medida &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -148,7 +148,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['atividadeDescarte']='A atividade de descarte é obrigatória!';
+                    $erros_validacao['atividadeDescarte']='A atividade de descarte &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -166,7 +166,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['hl']='A meia-vida é obrigatória!';
+                    $erros_validacao['hl']='A meia-vida &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -184,7 +184,7 @@ $lingua=$_GET['lingua'];
             {
                 if($lingua==1)
                 {
-                    $erros_validacao['data']='A data da medida é obrigatória!';
+                    $erros_validacao['data']='A data da medida &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {
@@ -200,7 +200,7 @@ $lingua=$_GET['lingua'];
         {
 			if($lingua==1)
                 {
-                    $erros_validacao['atividade']='A atividade inicial é obrigatória!';
+                    $erros_validacao['atividade']='A atividade inicial &eacute; obrigat&oacute;ria!';
                 }
                 else
                 {

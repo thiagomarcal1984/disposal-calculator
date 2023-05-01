@@ -36,7 +36,7 @@
             <div class="col-12 col-md-6 order-md-first order-last my-2">
                 <form class="border border-secondary rounded p-3" method="POST">
                     <h3 class="text-primary">
-                        <?= $lingua == 1 ? "Parâmetros a sua escolha" : "Parameters of your choice" ?>
+                        <?= $lingua == 1 ? "Par&acirc;metros a sua escolha" : "Parameters of your choice" ?>
                     </h3>
                     <div class="row py-2">
                         <!--Atividade-->
@@ -150,7 +150,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    <?= ($lingua == 1) ? "Número de dias para o descarte" : "Numbers of days for disposal" ?>:
+                                    <?= ($lingua == 1) ? "N&uacute;mero de dias para o descarte" : "Numbers of days for disposal" ?>:
                                 </th>
                                 <td>
                                     <?php echo $t; ?>

@@ -70,7 +70,7 @@
             if($lingua==1)
             {
                 $adescarte ='Especifique o estado';
-                $estado2 = "Sem informação";
+                $estado2 = "Sem informa&ccedil;&atilde;o";
             }
             else
             {
@@ -86,7 +86,7 @@
             $estado='qualquer';
             if($lingua==1)
             {
-                $estado2='Sólido';
+                $estado2='S&oacute;lido';
             }
             else
             {
@@ -207,8 +207,8 @@
          {
             if($lingua==1)
             {
-                $t='sem parâmetros';
-                $data_descarte='sem parâmetros';
+                $t='sem par&acirc;metros';
+                $data_descarte='sem par&acirc;metros';
             }
             else
             {

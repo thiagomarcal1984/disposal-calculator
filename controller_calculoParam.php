@@ -102,8 +102,8 @@
      {
         if($lingua==1)
         {
-            $t='sem parâmetros';
-            $data_descarte='sem parâmetros';
+            $t='sem par&acirc;metros';
+            $data_descarte='sem par&acirc;metros';
         }
         else
         {

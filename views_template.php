@@ -37,11 +37,11 @@
                     <form class="border border-secondary rounded p-3 my-2" method="POST">
                         <h3 class="text-primary">
                             <?php if ($lingua == 1 && $opcao == 1) : ?> 
-                                Rejeito líquido e gasoso
+                                Rejeito l&iacute;quido e gasoso
                             <?php elseif ($lingua == 2 && $opcao == 1) : ?> 
                                 Liquid and gaseous waste
                             <?php elseif ($lingua == 1 && $opcao == 2) : ?> 
-                                Rejeito sólido
+                                Rejeito s&oacute;lido
                             <?php elseif ($lingua == 2 && $opcao == 2) : ?> 
                                 Solid waste
                             <?php endif ?> 
@@ -50,7 +50,7 @@
                             <!--Identificação do radionuclídeo-->
                             <div class="col-12 col-md-4">
                                 <label for="nome" class="form-label">
-                                    <?= ($lingua == 1) ? "Radionuclídeo:" : "Radionuclide:" ?>
+                                    <?= ($lingua == 1) ? "Radionucl&iacute;deo:" : "Radionuclide:" ?>
                                 </label>
                             </div>
             
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <span class="form-label">
-                                        <?= ($lingua == 1) ? "Sólido" : "Solid" ?>
+                                        <?= ($lingua == 1) ? "S&oacute;lido" : "Solid" ?>
                                         (<=1000 kg)
                                     </span>
                                 </div>
@@ -232,10 +232,10 @@
                     <div class="alert alert-warning small">
                         (<?= 
                             $lingua == 1 ? 
-                            "Seguindo a publicação: " :
+                            "Segundo a publica&ccedil;&atilde;o: " :
                             "According to publication: "
                         ?>
-                        <a class='letra' target='_blank' href=http://appasp.cnen.gov.br/seguranca/normas/pdf/Nrm801.pdf>CNEN-8.01 Gerência de rejeitos de baixo e médio níveis de radiação</a>)
+                        <a class='letra' target='_blank' href=http://appasp.cnen.gov.br/seguranca/normas/pdf/Nrm801.pdf>CNEN-8.01 Ger&ecirc;ncia de rejeitos de baixo e m&eacute;dio n&iacute;veis de radia&ccedil;&atilde;o</a>)
                     </div>
                 </div>
                 <?php if (isset($data_exibicao)) : ?>
@@ -247,7 +247,7 @@
                             </h3>
                             <table class="table table-bordered table-striped">
                                 <th>
-                                    <?= ($lingua == 1) ? "Radionuclídeo" :  "Radionuclide" ?>
+                                    <?= ($lingua == 1) ? "Radionucl&iacute;deo" :  "Radionuclide" ?>
                                 </th>
                                 <td>
                                     <?php echo $radio['nome']; ?>
@@ -312,7 +312,7 @@
                             </tr>
                             <tr>
                                 <th>
-                                    <?= ($lingua == 1) ? "Número de dias  para o descarte" :  "Numbers of days for disposal" ?>
+                                    <?= ($lingua == 1) ? "N&uacute;mero de dias  para o descarte" :  "Numbers of days for disposal" ?>
                                 </th>
                                 <td>
                                     <?php echo $t; ?>
@@ -329,7 +329,7 @@
                             <div class="text-center small">
                                 <?= 
                                     $lingua == 1 ? 
-                                    "* As meias-vidas foram obtidas do seguinte site da IAEA (Agência Internacional de Energia Atômica): " : 
+                                    "* As meias-vidas foram obtidas do seguinte site da IAEA (Ag&ecirc;ncia Internacional de Energia At&ocirc;mica): " : 
                                     "* The half-lifes were obtained from IAEA (International Atomic Energy Agency):"
                                 ?>
                                 <a target="_blank" href="https://www-nds.iaea.org/relnsd/vcharthtml/VChartHTML.html">

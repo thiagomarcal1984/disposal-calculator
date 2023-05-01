@@ -20,9 +20,9 @@
     <main class="container container-md-fluid py-3">
 
         <h3>Disposal Date Calculator for Radioactive Material</h3>
-        <p>(Seguindo a publicação/According to publication:
+        <p>(Segundo a publica&ccedil;&atilde;o/According to publication:
             <a class="letra" target="_blank" href=http://appasp.cnen.gov.br/seguranca/normas/pdf/Nrm801.pdf>
-                CNEN-8.01 Gerência de rejeitos de baixo e médio níveis de radiação
+                CNEN-8.01 Ger&ecirc;ncia de rejeitos de baixo e m&eacute;dio n&iacute;veis de radia&ccedil;&atilde;o
             </a>)
         </p>
 
@@ -32,10 +32,10 @@
         <div class="row p-0 p-md-3">
             <div class="col-6">
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-action list-group-item-success active">Português</a>
-                    <a href="controller_entrada.php?opcao=1&lingua=1" class="list-group-item list-group-item-action">Líquido/gasoso</a>
-                    <a href="controller_entrada.php?opcao=2&lingua=1" class="list-group-item list-group-item-action">Sólido</a>
-                    <a href="controller_entrada.php?opcao=3&lingua=1" class="list-group-item list-group-item-action">Parâmetros a sua escolha</a>
+                    <a class="list-group-item list-group-item-action list-group-item-success active">Portugu&ecirc;s</a>
+                    <a href="controller_entrada.php?opcao=1&lingua=1" class="list-group-item list-group-item-action">L&iacute;quido/gasoso</a>
+                    <a href="controller_entrada.php?opcao=2&lingua=1" class="list-group-item list-group-item-action">S&oacute;lido</a>
+                    <a href="controller_entrada.php?opcao=3&lingua=1" class="list-group-item list-group-item-action">Par&acirc;metros a sua escolha</a>
                 </div>
             </div>
             <div class="col-6">
